@@ -2,6 +2,8 @@ package org.example;
 
 // Fig. 17.12: ArraysAndStreams2.java
 // Demonstrating lambdas and streams with an array of Strings.
+import com.sun.jdi.ClassNotPreparedException;
+
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -18,6 +20,28 @@ public class ArraysAndStreams2 {
          Arrays.stream(strings)             
                .map(String::toUpperCase)   
                .collect(Collectors.toList()));
+
+
+      System.out.printf("strings that start with vowel %s%n",
+              Arrays.stream(strings)
+                      .filter(s -> {
+                        return s.startsWith("a") || s.startsWith("e") || s.startsWith("i") || s.startsWith("o") || s.startsWith("u");
+                      })
+                              .sorted(String.CASE_INSENSITIVE_ORDER)
+                                      .collect(Collectors.toList()));
+
+
+      System.out.printf("Strings in a line %s%n",Arrays.stream(strings));
+
+
+      long count = Arrays.stream(strings)
+              .filter(s -> s.length() > 5)
+              .count();
+      System.out.printf("number of strings with more than 5 characters %d%n", count);
+
+
+
+
 
       // strings less than "n" (case insensitive) sorted ascending
       System.out.printf("strings less than n sorted ascending: %s%n",
